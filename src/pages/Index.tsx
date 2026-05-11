@@ -400,6 +400,28 @@ export default function Index() {
                 {sec === "cool-cats" ? "COOL CATS" : sec === "browser" ? "🌐 BROWSER" : sec.toUpperCase()}
               </button>
             ))}
+            <a
+              href="https://youtube.com/@CatTown"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-link"
+              style={{ background: "#FF0000", color: "white", border: "2px solid #FF0000" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#cc0000"; (e.currentTarget as HTMLElement).style.color = "white"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FF0000"; (e.currentTarget as HTMLElement).style.color = "white"; }}
+            >
+              ▶ YOUTUBE
+            </a>
+            <a
+              href="https://discord.gg/cattown"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-link"
+              style={{ background: "#5865F2", color: "white", border: "2px solid #5865F2" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#4752c4"; (e.currentTarget as HTMLElement).style.color = "white"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#5865F2"; (e.currentTarget as HTMLElement).style.color = "white"; }}
+            >
+              # DISCORD
+            </a>
           </div>
         </div>
       </nav>
