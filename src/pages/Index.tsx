@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useCatTownMusic } from "@/hooks/useCatTownMusic";
 
 const CAT_HERO = "https://cdn.ezst.app/projects/21455392-ec4f-4edb-b1e5-76c9cb10d747/files/bde3de86-1cae-43b4-929e-67c000c066d5.jpg";
 const CAT_MEMES = "https://cdn.ezst.app/projects/21455392-ec4f-4edb-b1e5-76c9cb10d747/files/9bd8cf93-8fad-4055-9c27-13d1db0cf614.jpg";
@@ -38,6 +39,14 @@ export default function Index() {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMsg, setPopupMsg] = useState("");
   const [soundPlaying, setSoundPlaying] = useState<string | null>(null);
+  const { playing: musicPlaying, toggleMusic } = useCatTownMusic();
+  const [waveFrame, setWaveFrame] = useState(0);
+
+  useEffect(() => {
+    if (!musicPlaying) return;
+    const id = setInterval(() => setWaveFrame(f => f + 1), 120);
+    return () => clearInterval(id);
+  }, [musicPlaying]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -67,6 +76,53 @@ export default function Index() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--ct-yellow)" }}>
+
+      {/* Music Player — XP style, fixed bottom-left */}
+      <div className="fixed bottom-6 left-6 z-50 xp-window" style={{ minWidth: 220 }}>
+        <div className="xp-titlebar">
+          <span>🎵 CAT TOWN RADIO</span>
+          <span style={{ fontSize: "8px", color: musicPlaying ? "var(--ct-lime)" : "#888" }}>
+            {musicPlaying ? "● LIVE" : "○ OFF"}
+          </span>
+        </div>
+        <div className="p-3 flex flex-col gap-2" style={{ background: "white" }}>
+          <div className="font-pixel text-center" style={{ fontSize: "8px", color: "#555" }}>
+            {musicPlaying ? "♪ Cat Town Theme ♪" : "~ press play ~"}
+          </div>
+          {/* Fake waveform bars */}
+          <div className="flex items-end justify-center gap-0.5" style={{ height: 24 }}>
+            {Array.from({ length: 16 }).map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: 4,
+                  background: musicPlaying ? "var(--ct-blue)" : "#ccc",
+                  height: musicPlaying
+                    ? `${Math.abs(Math.sin((waveFrame / 3 + i) * 0.9)) * 20 + 4}px`
+                    : 4,
+                  transition: "height 0.15s ease, background 0.3s",
+                  border: "1px solid var(--ct-black)",
+                }}
+              />
+            ))}
+          </div>
+          <button
+            onClick={toggleMusic}
+            className="xp-btn w-full text-center"
+            style={{
+              background: musicPlaying ? "var(--ct-red)" : "var(--ct-black)",
+              color: "var(--ct-yellow)",
+              fontSize: "10px",
+              padding: "6px",
+            }}
+          >
+            {musicPlaying ? "⏹ STOP" : "▶ PLAY MUSIC"}
+          </button>
+          <div className="font-pixel text-center" style={{ fontSize: "7px", color: "#aaa" }}>
+            Undertale-style chiptune
+          </div>
+        </div>
+      </div>
 
       {/* Popup notification */}
       {showPopup && (
