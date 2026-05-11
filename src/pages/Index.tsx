@@ -32,6 +32,198 @@ const CAT_FACTS = [
 
 const SOUNDS_XP = ["✅ Error.wav", "🔔 Notify.wav", "💻 Startup.wav", "❌ Critical.wav"];
 
+const BANNED_WORDS = ["dog", "dogs", "doggo", "puppy", "puppies", "pupper", "canine", "woof", "ai", "artificial intelligence", "chatgpt", "openai", "midjourney", "dall-e", "stable diffusion", "machine learning", "neural", "robot"];
+
+
+
+const MEME_PAGES = [
+  {
+    id: "lolcat",
+    title: "LOLcat Encyclopedia",
+    emoji: "📚",
+    url: "catpedia.cat/lolcat",
+    tags: ["meme", "lol", "cheezburger", "lolcat", "funny", "classic"],
+    content: [
+      { label: "Origin", value: "2006 — Something Awful forums" },
+      { label: "Peak popularity", value: "2007–2009" },
+      { label: "Signature text", value: '"I CAN HAS CHEEZBURGER?"' },
+      { label: "Language", value: "LOLspeak — broken English on purpose" },
+      { label: "Legacy", value: "Launched entire internet meme culture" },
+    ],
+    body: "LOLcats are images of cats with humorous captions written in deliberately broken English known as LOLspeak. The format exploded in 2007 when 'I Can Has Cheezburger?' became the first viral cat meme. Still iconic. Still undefeated.",
+  },
+  {
+    id: "keyboard",
+    title: "Keyboard Cat — Full History",
+    emoji: "🎹",
+    url: "catpedia.cat/keyboard-cat",
+    tags: ["keyboard", "charlie", "piano", "music", "meme", "classic"],
+    content: [
+      { label: "Real name", value: "Charlie (the cat)" },
+      { label: "Filmed", value: "1984 by Charlie Schmidt" },
+      { label: "Went viral", value: "2009" },
+      { label: "Catchphrase", value: '"Play him off, Keyboard Cat"' },
+      { label: "Status", value: "Hall of Fame — Eternal Legend" },
+    ],
+    body: "Charlie was filmed in 1984 wearing a blue shirt and appearing to play a keyboard. The video was uploaded to YouTube in 2007 but exploded in 2009 when it became the ultimate 'fail' outro. RIP Charlie. The music never stops.",
+  },
+  {
+    id: "nyan",
+    title: "Nyan Cat — Official Page",
+    emoji: "🌈",
+    url: "catpedia.cat/nyan-cat",
+    tags: ["nyan", "rainbow", "poptart", "space", "meme", "music"],
+    content: [
+      { label: "Created by", value: "prguitarman (Chris Torres)" },
+      { label: "Year", value: "2011" },
+      { label: "Speed", value: "Infinite (it never stops)" },
+      { label: "Flavor", value: "Pop-Tart (strawberry)" },
+      { label: "NFT sale", value: "$590,000 in 2021" },
+    ],
+    body: "Nyan Cat is a grey cat with a Pop-Tart body flying through space leaving a rainbow trail. The looping 8-bit melody is burned into the brain of an entire generation. It sold as an NFT for $590,000. Correct.",
+  },
+  {
+    id: "grumpy",
+    title: "Grumpy Cat — The Legend",
+    emoji: "😾",
+    url: "catpedia.cat/grumpy-cat",
+    tags: ["grumpy", "tardar sauce", "no", "famous", "celebrity", "meme"],
+    content: [
+      { label: "Real name", value: "Tardar Sauce" },
+      { label: "Born", value: "April 4, 2012" },
+      { label: "Condition", value: "Feline dwarfism (natural)" },
+      { label: "Net worth", value: "~$1 million+" },
+      { label: "Catchphrase", value: '"NO."' },
+    ],
+    body: "Tardar Sauce, known as Grumpy Cat, had a permanently grumpy expression due to an underbite and feline dwarfism. She passed in 2019 but lives forever in meme history. Her answer to everything was NO. We respect this.",
+  },
+  {
+    id: "ceiling",
+    title: "Ceiling Cat — Watcher of All",
+    emoji: "👁️",
+    url: "catpedia.cat/ceiling-cat",
+    tags: ["ceiling", "watching", "hole", "meme", "2006", "classic"],
+    content: [
+      { label: "First appearance", value: "4chan, 2006" },
+      { label: "Pose", value: "Peering through ceiling hole" },
+      { label: "Role", value: "Omniscient observer of the internet" },
+      { label: "Rival", value: "Basement Cat (evil counterpart)" },
+      { label: "Legacy", value: "God-tier surrealist meme" },
+    ],
+    body: "Ceiling Cat is a photo of a cat peering through a hole in a ceiling tile, looking directly at you. It spawned an entire theology of internet cat religion, including Basement Cat as the devil. A true classic of early internet chaos.",
+  },
+  {
+    id: "longcat",
+    title: "Longcat — How Long Is Long?",
+    emoji: "📏",
+    url: "catpedia.cat/longcat",
+    tags: ["long", "stretch", "longcat", "meme", "2006", "height"],
+    content: [
+      { label: "Real name", value: "Nobiko" },
+      { label: "Origin", value: "Japan, 2006" },
+      { label: "Length", value: "Astronomically long" },
+      { label: "Rival", value: "Tacgnol (evil mirror)" },
+      { label: "Verdict", value: "Longcat is loooooooong" },
+    ],
+    body: "Longcat (Nobiko) is a Japanese cat photographed being stretched vertically, creating the illusion of extreme length. The meme spawned epic Photoshop battles, a rival named Tacgnol, and the eternal truth: Longcat IS long.",
+  },
+];
+
+const BREED_PAGES = [
+  {
+    id: "maine-coon",
+    title: "Maine Coon",
+    emoji: "🦁",
+    url: "catbreeds.cat/maine-coon",
+    tags: ["maine coon", "big", "fluffy", "large", "breed", "gentle giant"],
+    content: [
+      { label: "Origin", value: "Maine, USA" },
+      { label: "Weight", value: "4–8 kg (up to 11 kg)" },
+      { label: "Personality", value: "Dog-like loyalty, playful, gentle" },
+      { label: "Coat", value: "Long, thick, water-resistant" },
+      { label: "Coolness rating", value: "★★★★★" },
+    ],
+    body: "The Maine Coon is one of the largest domestic cat breeds. They have tufted ears, bushy tails, and are often called 'dogs of the cat world' because they follow their owners around. Absolute units. Maximum chill.",
+  },
+  {
+    id: "persian",
+    title: "Persian Cat",
+    emoji: "👸",
+    url: "catbreeds.cat/persian",
+    tags: ["persian", "fluffy", "flat face", "fancy", "breed", "luxury"],
+    content: [
+      { label: "Origin", value: "Persia (modern Iran)" },
+      { label: "Face type", value: "Brachycephalic (very flat)" },
+      { label: "Personality", value: "Calm, dignified, lap cat" },
+      { label: "Coat", value: "Long, silky, needs daily brushing" },
+      { label: "Vibe", value: "Royalty. Pure royalty." },
+    ],
+    body: "Persian cats are the aristocrats of the cat world. They have luxurious long fur, flat smushed faces, and an air of absolute superiority. They will sit on your lap if they feel like it. You should feel honored.",
+  },
+  {
+    id: "siamese",
+    title: "Siamese Cat",
+    emoji: "🗣️",
+    url: "catbreeds.cat/siamese",
+    tags: ["siamese", "vocal", "loud", "talkative", "breed", "sleek"],
+    content: [
+      { label: "Origin", value: "Thailand (formerly Siam)" },
+      { label: "Voice", value: "Extremely loud — they WILL tell you" },
+      { label: "Personality", value: "Social, demanding, very opinionated" },
+      { label: "Eyes", value: "Piercing blue, always judging" },
+      { label: "Known for", value: "Telling you exactly what's wrong" },
+    ],
+    body: "Siamese cats are the most vocal cats on Earth. They have opinions. They will share them. At 3am if necessary. They are sleek, blue-eyed, and 100% convinced they are in charge. They are correct.",
+  },
+  {
+    id: "scottish-fold",
+    title: "Scottish Fold",
+    emoji: "🥺",
+    url: "catbreeds.cat/scottish-fold",
+    tags: ["scottish fold", "folded ears", "round", "cute", "breed", "owl"],
+    content: [
+      { label: "Origin", value: "Scotland, 1961" },
+      { label: "Signature feature", value: "Folded ears (mutation)" },
+      { label: "Personality", value: "Calm, adaptable, owl-like" },
+      { label: "Pose", value: "Sits like a human constantly" },
+      { label: "Internet fame", value: "Taylor Swift's cats are Scottish Folds" },
+    ],
+    body: "Scottish Folds have a natural mutation causing their ears to fold forward, giving them an owl-like appearance and permanent look of gentle concern. They sit in bizarre human-like positions. Taylor Swift has two. Verdict: extremely cute.",
+  },
+  {
+    id: "sphynx",
+    title: "Sphynx Cat",
+    emoji: "🛸",
+    url: "catbreeds.cat/sphynx",
+    tags: ["sphynx", "hairless", "naked", "alien", "breed", "wrinkly"],
+    content: [
+      { label: "Origin", value: "Toronto, Canada, 1966" },
+      { label: "Coat", value: "None. Zero. Hairless." },
+      { label: "Skin", value: "Warm, wrinkly, feels like suede" },
+      { label: "Personality", value: "Extremely social, loves warmth, extrovert" },
+      { label: "Vibe", value: "Ancient Egyptian god or alien, unclear" },
+    ],
+    body: "The Sphynx is hairless due to a natural mutation. Despite looking like a sci-fi creature, they are incredibly affectionate and love body heat. They will sit on your face if cold. This is non-negotiable.",
+  },
+  {
+    id: "bengal",
+    title: "Bengal Cat",
+    emoji: "🐆",
+    url: "catbreeds.cat/bengal",
+    tags: ["bengal", "spotted", "wild", "leopard", "breed", "athletic"],
+    content: [
+      { label: "Origin", value: "USA — hybrid of Asian leopard cat" },
+      { label: "Pattern", value: "Spotted or marbled, like a leopard" },
+      { label: "Personality", value: "Athletic, wild energy, very smart" },
+      { label: "Coat", value: "Short, glittery sheen in sunlight" },
+      { label: "Warning", value: "Will absolutely rob your house" },
+    ],
+    body: "Bengal cats look like miniature leopards and have the energy to match. They are descended from the Asian leopard cat and have a distinctive glittery spotted coat. They need enrichment or they WILL redecorate your home for you.",
+  },
+];
+
+const ALL_BROWSER_PAGES = [...MEME_PAGES, ...BREED_PAGES];
+
 export default function Index() {
   const [activeSection, setActiveSection] = useState("home");
   const [currentFact, setCurrentFact] = useState(0);
@@ -41,6 +233,14 @@ export default function Index() {
   const [soundPlaying, setSoundPlaying] = useState<string | null>(null);
   const { playing: musicPlaying, toggleMusic } = useCatTownMusic();
   const [waveFrame, setWaveFrame] = useState(0);
+
+  // Browser state
+  const [browserQuery, setBrowserQuery] = useState("");
+  const [browserInput, setBrowserInput] = useState("");
+  const [browserPage, setBrowserPage] = useState<string | null>(null);
+  const [browserBanned, setBrowserBanned] = useState(false);
+  const [browserTab, setBrowserTab] = useState<"memes" | "breeds">("memes");
+  const [browserHistory, setBrowserHistory] = useState<string[]>([]);
 
   useEffect(() => {
     if (!musicPlaying) return;
@@ -73,6 +273,50 @@ export default function Index() {
     setActiveSection(section);
     window.scrollTo({ top: 0 });
   }
+
+  function isBanned(q: string) {
+    const lower = q.toLowerCase();
+    return BANNED_WORDS.some(w => lower.includes(w));
+  }
+
+  function handleBrowserSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const q = browserInput.trim();
+    if (!q) return;
+    if (isBanned(q)) {
+      setBrowserBanned(true);
+      setBrowserPage(null);
+      setBrowserQuery(q);
+      return;
+    }
+    setBrowserBanned(false);
+    setBrowserPage(null);
+    setBrowserQuery(q);
+  }
+
+  function openBrowserPage(id: string) {
+    setBrowserPage(id);
+    setBrowserBanned(false);
+    setBrowserHistory(h => [...h, id]);
+  }
+
+  function browserBack() {
+    const newHistory = [...browserHistory];
+    newHistory.pop();
+    setBrowserHistory(newHistory);
+    setBrowserPage(newHistory[newHistory.length - 1] ?? null);
+  }
+
+  const browserResults = browserQuery
+    ? ALL_BROWSER_PAGES.filter(p =>
+        p.tags.some(t => t.includes(browserQuery.toLowerCase())) ||
+        p.title.toLowerCase().includes(browserQuery.toLowerCase())
+      )
+    : null;
+
+  const currentBrowserPage = browserPage
+    ? ALL_BROWSER_PAGES.find(p => p.id === browserPage)
+    : null;
 
   return (
     <div className="min-h-screen" style={{ background: "var(--ct-yellow)" }}>
@@ -147,13 +391,13 @@ export default function Index() {
             </span>
           </div>
           <div className="flex flex-wrap gap-1">
-            {["home", "memes", "about", "cool-cats", "more"].map(sec => (
+            {["home", "memes", "about", "cool-cats", "browser", "more"].map(sec => (
               <button
                 key={sec}
                 onClick={() => handleNav(sec)}
                 className={`nav-link ${activeSection === sec ? "active" : ""}`}
               >
-                {sec === "cool-cats" ? "COOL CATS" : sec.toUpperCase()}
+                {sec === "cool-cats" ? "COOL CATS" : sec === "browser" ? "🌐 BROWSER" : sec.toUpperCase()}
               </button>
             ))}
           </div>
@@ -542,6 +786,216 @@ export default function Index() {
                 </div>
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* ===== BROWSER ===== */}
+        {activeSection === "browser" && (
+          <div className="space-y-0">
+            {/* Browser chrome */}
+            <div className="xp-window">
+              <div className="xp-titlebar">
+                <span>🌐 CatScape Navigator 3.0 — The Only Browser You Need</span>
+                <span>_  □  X</span>
+              </div>
+
+              {/* Toolbar */}
+              <div style={{ background: "#d4d0c8", borderBottom: "3px solid var(--ct-black)", padding: "6px 8px" }} className="flex items-center gap-2 flex-wrap">
+                {/* Back button */}
+                <button
+                  onClick={browserBack}
+                  disabled={browserHistory.length === 0}
+                  className="xp-btn"
+                  style={{ padding: "4px 10px", fontSize: "10px", background: browserHistory.length === 0 ? "#eee" : undefined, color: browserHistory.length === 0 ? "#aaa" : undefined, cursor: browserHistory.length === 0 ? "not-allowed" : undefined }}
+                >
+                  ◀ BACK
+                </button>
+                <button
+                  onClick={() => { setBrowserPage(null); setBrowserQuery(""); setBrowserInput(""); setBrowserBanned(false); setBrowserHistory([]); }}
+                  className="xp-btn"
+                  style={{ padding: "4px 10px", fontSize: "10px" }}
+                >
+                  🏠 HOME
+                </button>
+
+                {/* Address bar */}
+                <form onSubmit={handleBrowserSearch} className="flex-1 flex gap-2" style={{ minWidth: 200 }}>
+                  <div className="flex-1 flex items-center" style={{ background: "white", border: "3px solid var(--ct-black)", padding: "2px 8px" }}>
+                    <span className="font-pixel mr-2" style={{ fontSize: "8px", color: "#888" }}>
+                      {currentBrowserPage ? currentBrowserPage.url : "catscope://home"}
+                    </span>
+                    <input
+                      type="text"
+                      value={browserInput}
+                      onChange={e => setBrowserInput(e.target.value)}
+                      placeholder="Search cats, memes, breeds..."
+                      className="flex-1 font-comic font-bold"
+                      style={{ outline: "none", border: "none", fontSize: "13px", background: "transparent" }}
+                    />
+                  </div>
+                  <button type="submit" className="xp-btn" style={{ padding: "4px 14px", fontSize: "10px", background: "var(--ct-blue)", color: "white" }}>GO!</button>
+                </form>
+              </div>
+
+              {/* Browser content */}
+              <div style={{ background: "white", minHeight: 500, padding: 0 }}>
+
+                {/* BANNED */}
+                {browserBanned && (
+                  <div className="flex flex-col items-center justify-center p-16 text-center" style={{ background: "white", minHeight: 400 }}>
+                    <div style={{ fontSize: 120, lineHeight: 1 }}>🚫</div>
+                    <div className="font-pixel mt-6 mb-4" style={{ fontSize: "28px", color: "var(--ct-red)" }}>NO</div>
+                    <div className="font-pixel mb-2" style={{ fontSize: "11px", color: "var(--ct-black)" }}>
+                      Error 403: Forbidden
+                    </div>
+                    <div className="font-comic font-bold text-lg mt-2" style={{ color: "#444", maxWidth: 400 }}>
+                      CatScape Navigator has blocked your search for <strong>"{browserQuery}"</strong>.
+                    </div>
+                    <div className="font-comic font-bold mt-3" style={{ color: "#666" }}>
+                      This browser only shows cats. Try searching: <em>memes, breeds, nyan, fluffy, grumpy...</em>
+                    </div>
+                    <div className="font-pixel mt-6 blink" style={{ fontSize: "10px", color: "var(--ct-red)" }}>
+                      ⚠️ YOUR SEARCH HAS BEEN LOGGED AND JUDGED ⚠️
+                    </div>
+                  </div>
+                )}
+
+                {/* PAGE VIEW */}
+                {!browserBanned && currentBrowserPage && (
+                  <div className="p-6">
+                    <div className="flex items-center gap-4 mb-6 pb-4" style={{ borderBottom: "3px solid var(--ct-black)" }}>
+                      <span style={{ fontSize: 56 }}>{currentBrowserPage.emoji}</span>
+                      <div>
+                        <h2 style={{ fontFamily: "Fredoka One", fontSize: "2.5rem", lineHeight: 1 }}>{currentBrowserPage.title}</h2>
+                        <div className="font-pixel" style={{ fontSize: "9px", color: "#888", marginTop: 4 }}>
+                          📍 {currentBrowserPage.url}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <p className="font-comic font-bold text-lg leading-relaxed mb-6" style={{ color: "#333" }}>
+                          {currentBrowserPage.body}
+                        </p>
+                        <button onClick={browserBack} className="xp-btn" style={{ fontSize: "10px" }}>← BACK TO RESULTS</button>
+                      </div>
+                      <div className="xp-window">
+                        <div className="xp-titlebar"><span>📋 QUICK FACTS</span><span>_  □  X</span></div>
+                        <div className="p-4">
+                          <table className="retro-table">
+                            <tbody>
+                              {currentBrowserPage.content.map((row, i) => (
+                                <tr key={i}>
+                                  <td className="font-pixel" style={{ fontSize: "8px", background: "#fffbe6", whiteSpace: "nowrap" }}>{row.label}</td>
+                                  <td className="font-comic font-bold">{row.value}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* SEARCH RESULTS */}
+                {!browserBanned && !currentBrowserPage && browserQuery && (
+                  <div className="p-6">
+                    <div className="font-pixel mb-4" style={{ fontSize: "9px", color: "#888" }}>
+                      CatScape found {browserResults?.length ?? 0} result(s) for "{browserQuery}"
+                    </div>
+                    {browserResults && browserResults.length > 0 ? (
+                      <div className="space-y-3">
+                        {browserResults.map(page => (
+                          <div key={page.id}
+                            onClick={() => openBrowserPage(page.id)}
+                            className="cursor-pointer p-4"
+                            style={{ border: "3px solid var(--ct-black)", background: "#fffbe6", transition: "all 0.1s", boxShadow: "3px 3px 0 black" }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translate(-2px,-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "5px 5px 0 black"; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = "3px 3px 0 black"; }}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span style={{ fontSize: 28 }}>{page.emoji}</span>
+                              <div>
+                                <div className="font-pixel" style={{ fontSize: "9px", color: "var(--ct-blue)", textDecoration: "underline" }}>
+                                  {page.title}
+                                </div>
+                                <div className="font-pixel" style={{ fontSize: "8px", color: "#888" }}>{page.url}</div>
+                                <div className="font-comic font-bold text-sm mt-1" style={{ color: "#444" }}>
+                                  {page.body.slice(0, 100)}...
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-16">
+                        <div style={{ fontSize: 64 }}>🐾</div>
+                        <div className="font-pixel mt-4 mb-2" style={{ fontSize: "11px" }}>NO RESULTS FOUND</div>
+                        <div className="font-comic font-bold" style={{ color: "#666" }}>
+                          We couldn't find anything for "{browserQuery}". Try: memes, nyan, grumpy, maine coon, sphynx...
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* HOME / DIRECTORY */}
+                {!browserBanned && !currentBrowserPage && !browserQuery && (
+                  <div className="p-6">
+                    <div className="font-pixel text-center mb-6" style={{ fontSize: "10px", color: "#888" }}>
+                      🐱 CATSCOPE NAVIGATOR — CAT INTERNET DIRECTORY 🐱
+                    </div>
+
+                    {/* Tab switcher */}
+                    <div className="flex mb-4" style={{ borderBottom: "3px solid var(--ct-black)" }}>
+                      {(["memes", "breeds"] as const).map(tab => (
+                        <button key={tab} onClick={() => setBrowserTab(tab)}
+                          className="font-pixel px-6 py-2"
+                          style={{
+                            fontSize: "9px",
+                            background: browserTab === tab ? "var(--ct-yellow)" : "white",
+                            border: "3px solid var(--ct-black)",
+                            borderBottom: browserTab === tab ? "3px solid var(--ct-yellow)" : "3px solid var(--ct-black)",
+                            marginBottom: browserTab === tab ? -3 : 0,
+                            fontWeight: "bold",
+                          }}>
+                          {tab === "memes" ? "🐾 MEMES" : "📖 BREEDS"}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {(browserTab === "memes" ? MEME_PAGES : BREED_PAGES).map(page => (
+                        <div key={page.id}
+                          onClick={() => openBrowserPage(page.id)}
+                          className="cursor-pointer p-4 flex items-center gap-3"
+                          style={{ border: "3px solid var(--ct-black)", background: "white", boxShadow: "3px 3px 0 black", transition: "all 0.1s" }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translate(-2px,-2px)"; (e.currentTarget as HTMLElement).style.background = "#fffbe6"; (e.currentTarget as HTMLElement).style.boxShadow = "5px 5px 0 black"; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "white"; (e.currentTarget as HTMLElement).style.boxShadow = "3px 3px 0 black"; }}
+                        >
+                          <span style={{ fontSize: 36 }}>{page.emoji}</span>
+                          <div>
+                            <div className="font-pixel" style={{ fontSize: "9px", color: "var(--ct-blue)", textDecoration: "underline" }}>{page.title}</div>
+                            <div className="font-pixel" style={{ fontSize: "7px", color: "#aaa" }}>{page.url}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Status bar */}
+              <div style={{ background: "#d4d0c8", borderTop: "2px solid var(--ct-black)", padding: "3px 8px" }} className="flex justify-between">
+                <span className="font-pixel" style={{ fontSize: "8px", color: "#555" }}>
+                  {browserBanned ? "⛔ ACCESS DENIED" : currentBrowserPage ? `✅ Loaded: ${currentBrowserPage.url}` : "🌐 CatScape Navigator 3.0 — Ready"}
+                </span>
+                <span className="font-pixel" style={{ fontSize: "8px", color: "#888" }}>🔒 catscope:// safe zone</span>
+              </div>
             </div>
           </div>
         )}
