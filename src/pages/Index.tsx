@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useCatTownMusic } from "@/hooks/useCatTownMusic";
+import SnakeGame from "@/components/games/SnakeGame";
+import PongGame from "@/components/games/PongGame";
+import MinesweeperGame from "@/components/games/MinesweeperGame";
 
 const CAT_HERO = "https://cdn.ezst.app/projects/21455392-ec4f-4edb-b1e5-76c9cb10d747/files/bde3de86-1cae-43b4-929e-67c000c066d5.jpg";
 const CAT_MEMES = "https://cdn.ezst.app/projects/21455392-ec4f-4edb-b1e5-76c9cb10d747/files/9bd8cf93-8fad-4055-9c27-13d1db0cf614.jpg";
@@ -234,6 +237,9 @@ export default function Index() {
   const { playing: musicPlaying, toggleMusic } = useCatTownMusic();
   const [waveFrame, setWaveFrame] = useState(0);
 
+  // Games state
+  const [activeGame, setActiveGame] = useState<"snake" | "pong" | "minesweeper">("snake");
+
   // Browser state
   const [browserQuery, setBrowserQuery] = useState("");
   const [browserInput, setBrowserInput] = useState("");
@@ -391,13 +397,13 @@ export default function Index() {
             </span>
           </div>
           <div className="flex flex-wrap gap-1">
-            {["home", "memes", "about", "cool-cats", "browser", "more"].map(sec => (
+            {["home", "memes", "about", "cool-cats", "browser", "games", "more"].map(sec => (
               <button
                 key={sec}
                 onClick={() => handleNav(sec)}
                 className={`nav-link ${activeSection === sec ? "active" : ""}`}
               >
-                {sec === "cool-cats" ? "COOL CATS" : sec === "browser" ? "🌐 BROWSER" : sec.toUpperCase()}
+                {sec === "cool-cats" ? "COOL CATS" : sec === "browser" ? "🌐 BROWSER" : sec === "games" ? "🕹️ GAMES" : sec.toUpperCase()}
               </button>
             ))}
             <a
@@ -808,6 +814,75 @@ export default function Index() {
                 </div>
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* ===== GAMES ===== */}
+        {activeSection === "games" && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-4 flex-wrap">
+              <h2 className="text-5xl" style={{ fontFamily: "Fredoka One" }}>🕹️ GAMES ROOM</h2>
+              <div className="font-pixel blink" style={{ color: "var(--ct-red)", fontSize: "9px" }}>★ BOSS IS AWAY ★</div>
+            </div>
+
+            {/* Game selector tabs */}
+            <div className="flex gap-0" style={{ borderBottom: "4px solid var(--ct-black)" }}>
+              {([
+                { id: "snake", label: "🐍 CAT SNAKE" },
+                { id: "pong", label: "🏓 CAT PONG" },
+                { id: "minesweeper", label: "💣 MEOW-SWEEPER" },
+              ] as const).map(g => (
+                <button key={g.id} onClick={() => setActiveGame(g.id)}
+                  className="font-pixel px-5 py-3"
+                  style={{
+                    fontSize: "9px",
+                    background: activeGame === g.id ? "var(--ct-yellow)" : "var(--ct-black)",
+                    color: activeGame === g.id ? "var(--ct-black)" : "var(--ct-yellow)",
+                    border: "3px solid var(--ct-black)",
+                    borderBottom: activeGame === g.id ? "3px solid var(--ct-yellow)" : "3px solid var(--ct-black)",
+                    marginBottom: activeGame === g.id ? -4 : 0,
+                    cursor: "pointer",
+                  }}>
+                  {g.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Game window */}
+            <div className="xp-window">
+              <div className="xp-titlebar">
+                <span>
+                  {activeGame === "snake" && "🐍 Cat Snake — Eat the fish, don't eat yourself"}
+                  {activeGame === "pong" && "🏓 Cat Pong — 2 players, 1 keyboard"}
+                  {activeGame === "minesweeper" && "💣 Meow-sweeper — Find the bombs (don't)"}
+                </span>
+                <span>_  □  X</span>
+              </div>
+              <div className="p-4 flex justify-center" style={{ background: "#1a1a1a" }}>
+                {activeGame === "snake" && <SnakeGame />}
+                {activeGame === "pong" && <PongGame />}
+                {activeGame === "minesweeper" && <MinesweeperGame />}
+              </div>
+            </div>
+
+            {/* Controls cheatsheet */}
+            <div className="xp-window">
+              <div className="xp-titlebar"><span>⌨️ CONTROLS</span><span>_  □  X</span></div>
+              <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  { game: "🐍 Cat Snake", controls: ["Arrow keys — move", "R — restart", "Tap buttons on mobile"] },
+                  { game: "🏓 Cat Pong", controls: ["P1: W / S keys", "P2: ↑ / ↓ arrows", "Space — start  |  R — restart"] },
+                  { game: "💣 Meow-Sweeper", controls: ["Left click — reveal", "Right click — flag 🚩", "Find all cats without hitting 💣"] },
+                ].map(item => (
+                  <div key={item.game} style={{ border: "3px solid var(--ct-black)", padding: 12, background: "#fffbe6" }}>
+                    <div className="font-pixel mb-2" style={{ fontSize: "9px", color: "var(--ct-blue)" }}>{item.game}</div>
+                    {item.controls.map(c => (
+                      <div key={c} className="font-comic font-bold text-sm" style={{ color: "#444" }}>• {c}</div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
