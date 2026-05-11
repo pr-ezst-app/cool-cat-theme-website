@@ -3,6 +3,8 @@ import { useCatTownMusic } from "@/hooks/useCatTownMusic";
 import SnakeGame from "@/components/games/SnakeGame";
 import PongGame from "@/components/games/PongGame";
 import MinesweeperGame from "@/components/games/MinesweeperGame";
+import BeatMaker from "@/components/games/BeatMaker";
+import ExtensionStore from "@/components/games/ExtensionStore";
 
 const CAT_HERO = "https://cdn.ezst.app/projects/21455392-ec4f-4edb-b1e5-76c9cb10d747/files/bde3de86-1cae-43b4-929e-67c000c066d5.jpg";
 const CAT_MEMES = "https://cdn.ezst.app/projects/21455392-ec4f-4edb-b1e5-76c9cb10d747/files/9bd8cf93-8fad-4055-9c27-13d1db0cf614.jpg";
@@ -516,7 +518,7 @@ export default function Index() {
   const [waveFrame, setWaveFrame] = useState(0);
 
   // Games state
-  const [activeGame, setActiveGame] = useState<"snake" | "pong" | "minesweeper">("snake");
+  const [activeGame, setActiveGame] = useState<"snake" | "pong" | "minesweeper" | "beatmaker">("snake");
 
   // Browser state
   const [browserQuery, setBrowserQuery] = useState("");
@@ -524,7 +526,7 @@ export default function Index() {
   const [browserPage, setBrowserPage] = useState<string | null>(null);
   const [browserBanned, setBrowserBanned] = useState(false);
   const [browserBanReason, setBrowserBanReason] = useState("");
-  const [browserTab, setBrowserTab] = useState<"memes" | "breeds" | "site">("memes");
+  const [browserTab, setBrowserTab] = useState<"memes" | "breeds" | "site" | "extensions">("memes");
   const [browserHistory, setBrowserHistory] = useState<string[]>([]);
 
   useEffect(() => {
@@ -1126,6 +1128,7 @@ export default function Index() {
                 { id: "snake", label: "🐍 CAT SNAKE" },
                 { id: "pong", label: "🏓 CAT PONG" },
                 { id: "minesweeper", label: "💣 MEOW-SWEEPER" },
+                { id: "beatmaker", label: "🎹 BEAT MAKER" },
               ] as const).map(g => (
                 <button key={g.id} onClick={() => setActiveGame(g.id)}
                   className="font-pixel px-5 py-3"
@@ -1150,6 +1153,7 @@ export default function Index() {
                   {activeGame === "snake" && "🐍 Cat Snake — Eat the fish, don't eat yourself"}
                   {activeGame === "pong" && "🏓 Cat Pong — 2 players, 1 keyboard"}
                   {activeGame === "minesweeper" && "💣 Meow-sweeper — Find the bombs (don't)"}
+                  {activeGame === "beatmaker" && "🎹 Cat Beat Maker — Make a banger. Right now."}
                 </span>
                 <span>_  □  X</span>
               </div>
@@ -1157,6 +1161,7 @@ export default function Index() {
                 {activeGame === "snake" && <SnakeGame />}
                 {activeGame === "pong" && <PongGame />}
                 {activeGame === "minesweeper" && <MinesweeperGame />}
+                {activeGame === "beatmaker" && <BeatMaker />}
               </div>
             </div>
 
@@ -1168,6 +1173,7 @@ export default function Index() {
                   { game: "🐍 Cat Snake", controls: ["Arrow keys — move", "R — restart", "Tap buttons on mobile"] },
                   { game: "🏓 Cat Pong", controls: ["P1: W / S keys", "P2: ↑ / ↓ arrows", "Space — start  |  R — restart"] },
                   { game: "💣 Meow-Sweeper", controls: ["Left click — reveal", "Right click — flag 🚩", "Find all cats without hitting 💣"] },
+                  { game: "🎹 Beat Maker", controls: ["Click cells to toggle beats", "Click track name to preview", "Load a preset to start", "Drag BPM slider for tempo"] },
                 ].map(item => (
                   <div key={item.game} style={{ border: "3px solid var(--ct-black)", padding: 12, background: "#fffbe6" }}>
                     <div className="font-pixel mb-2" style={{ fontSize: "9px", color: "var(--ct-blue)" }}>{item.game}</div>
@@ -1357,6 +1363,7 @@ export default function Index() {
                         { id: "memes", label: "🐾 MEMES" },
                         { id: "breeds", label: "📖 BREEDS" },
                         { id: "site", label: "🏠 THIS SITE" },
+                        { id: "extensions", label: "🧩 EXTENSIONS" },
                       ] as const).map(tab => (
                         <button key={tab.id} onClick={() => setBrowserTab(tab.id)}
                           className="font-pixel px-5 py-2"
@@ -1379,28 +1386,32 @@ export default function Index() {
                       </div>
                     )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {(browserTab === "memes"
-                        ? [...MEME_PAGES, ...MORE_MEME_PAGES]
-                        : browserTab === "breeds"
-                        ? [...BREED_PAGES, ...MORE_BREED_PAGES]
-                        : SITE_PAGES
-                      ).map(page => (
-                        <div key={page.id}
-                          onClick={() => openBrowserPage(page.id)}
-                          className="cursor-pointer p-4 flex items-center gap-3"
-                          style={{ border: "3px solid var(--ct-black)", background: "white", boxShadow: "3px 3px 0 black", transition: "all 0.1s" }}
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translate(-2px,-2px)"; (e.currentTarget as HTMLElement).style.background = "#fffbe6"; (e.currentTarget as HTMLElement).style.boxShadow = "5px 5px 0 black"; }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "white"; (e.currentTarget as HTMLElement).style.boxShadow = "3px 3px 0 black"; }}
-                        >
-                          <span style={{ fontSize: 36 }}>{page.emoji}</span>
-                          <div>
-                            <div className="font-pixel" style={{ fontSize: "9px", color: "var(--ct-blue)", textDecoration: "underline" }}>{page.title}</div>
-                            <div className="font-pixel" style={{ fontSize: "7px", color: "#aaa" }}>{page.url}</div>
+                    {browserTab === "extensions" ? (
+                      <ExtensionStore />
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {(browserTab === "memes"
+                          ? [...MEME_PAGES, ...MORE_MEME_PAGES]
+                          : browserTab === "breeds"
+                          ? [...BREED_PAGES, ...MORE_BREED_PAGES]
+                          : SITE_PAGES
+                        ).map(page => (
+                          <div key={page.id}
+                            onClick={() => openBrowserPage(page.id)}
+                            className="cursor-pointer p-4 flex items-center gap-3"
+                            style={{ border: "3px solid var(--ct-black)", background: "white", boxShadow: "3px 3px 0 black", transition: "all 0.1s" }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translate(-2px,-2px)"; (e.currentTarget as HTMLElement).style.background = "#fffbe6"; (e.currentTarget as HTMLElement).style.boxShadow = "5px 5px 0 black"; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "white"; (e.currentTarget as HTMLElement).style.boxShadow = "3px 3px 0 black"; }}
+                          >
+                            <span style={{ fontSize: 36 }}>{page.emoji}</span>
+                            <div>
+                              <div className="font-pixel" style={{ fontSize: "9px", color: "var(--ct-blue)", textDecoration: "underline" }}>{page.title}</div>
+                              <div className="font-pixel" style={{ fontSize: "7px", color: "#aaa" }}>{page.url}</div>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
 
