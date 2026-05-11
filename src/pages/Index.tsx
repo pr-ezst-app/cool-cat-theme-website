@@ -35,7 +35,21 @@ const CAT_FACTS = [
 
 const SOUNDS_XP = ["✅ Error.wav", "🔔 Notify.wav", "💻 Startup.wav", "❌ Critical.wav"];
 
-const BANNED_WORDS = ["dog", "dogs", "doggo", "puppy", "puppies", "pupper", "canine", "woof", "ai", "artificial intelligence", "chatgpt", "openai", "midjourney", "dall-e", "stable diffusion", "machine learning", "neural", "robot"];
+const BANNED_WORDS = [
+  // Dogs
+  "dog", "dogs", "doggo", "doggy", "puppy", "puppies", "pupper", "pup", "pups",
+  "canine", "woof", "bark", "labrador", "poodle", "bulldog", "beagle", "dachshund",
+  "husky", "corgi", "golden retriever", "german shepherd", "rottweiler", "chihuahua",
+  "pitbull", "dalmatian", "greyhound", "spaniel", "terrier", "doberman",
+  // AI
+  "ai", "artificial intelligence", "chatgpt", "openai", "midjourney", "dall-e",
+  "stable diffusion", "machine learning", "neural", "robot", "gpt", "llm",
+  "deepmind", "copilot", "gemini", "claude", "bard", "algorithm", "generated",
+  // Banned general
+  "fish tank", "hamster", "parrot", "bird", "reptile", "snake food", "lizard",
+  "monday", "work", "meeting", "excel", "powerpoint", "boss", "deadline",
+  "vegetables", "broccoli", "diet", "exercise", "gym",
+];
 
 
 
@@ -225,7 +239,271 @@ const BREED_PAGES = [
   },
 ];
 
-const ALL_BROWSER_PAGES = [...MEME_PAGES, ...BREED_PAGES];
+const MORE_MEME_PAGES = [
+  {
+    id: "doge-rival",
+    title: "The Doge Situation — Classified",
+    emoji: "🤫",
+    url: "catpedia.cat/classified/doge",
+    tags: ["doge", "shiba", "wow", "such", "rival", "enemy", "history"],
+    content: [
+      { label: "Status", value: "RIVAL (not a cat)" },
+      { label: "Peak year", value: "2013" },
+      { label: "Threat level", value: "Medium — mostly harmless" },
+      { label: "Cat Town stance", value: "We acknowledge its existence" },
+      { label: "Verdict", value: "Not a cat. Still funny. Complicated." },
+    ],
+    body: "Doge (the Shiba Inu) is one of the most successful non-cat memes in internet history. Cat Town's position: we respect the hustle. We do not endorse the species. The 'wow such meme' format is objectively solid. This page exists only for historical documentation. Do not tell the cats.",
+  },
+  {
+    id: "business-cat",
+    title: "Business Cat — Corporate Legend",
+    emoji: "👔",
+    url: "catpedia.cat/business-cat",
+    tags: ["business cat", "office", "corporate", "tie", "meme", "work"],
+    content: [
+      { label: "Origin", value: "Reddit, 2012" },
+      { label: "Format", value: "Cat in tie giving corporate advice" },
+      { label: "Signature line", value: '"I need those TPS reports... with a ball of yarn"' },
+      { label: "Industry", value: "Finance, HR, General Chaos" },
+      { label: "Salary", value: "Paid in Fancy Feast" },
+    ],
+    body: "Business Cat is a meme of a serious-looking cat in a suit and tie dispensing absurd corporate advice. The format perfectly captures the pointlessness of office life. Business Cat doesn't care about your KPIs. Business Cat has a nap at 2pm.",
+  },
+  {
+    id: "cat-loaf",
+    title: "The Cat Loaf — Scientific Analysis",
+    emoji: "🍞",
+    url: "catpedia.cat/cat-loaf",
+    tags: ["loaf", "bread", "sitting", "paws", "tucked", "pose", "classic"],
+    content: [
+      { label: "Official name", value: "Hovercat / Sphinx position" },
+      { label: "Paw status", value: "Fully tucked (maximum loaf)" },
+      { label: "Temperature", value: "Cat is warm and content" },
+      { label: "Threat level", value: "Zero — this cat is off duty" },
+      { label: "Resemblance", value: "Bread loaf: 98.7% match" },
+    ],
+    body: "When a cat tucks all four paws under its body and sits perfectly still, it achieves the form known as The Loaf. Scientists agree this is the peak of feline relaxation. If disturbed, the loaf will give you a look. You deserve it.",
+  },
+  {
+    id: "surprised-pikachu",
+    title: "Surprised Pikachu vs Surprised Cat",
+    emoji: "😮",
+    url: "catpedia.cat/surprised-faces",
+    tags: ["surprised", "shock", "reaction", "face", "meme", "open mouth", "wide eyes"],
+    content: [
+      { label: "Surprised Cat origin", value: "Video: cat seeing vacuum, 2009" },
+      { label: "Surprise level", value: "Maximum (eyes: fully dilated)" },
+      { label: "Recovery time", value: "3–5 seconds, then dignity restored" },
+      { label: "Cat Town ruling", value: "Surprised Cat wins. Obviously." },
+      { label: "Pikachu comment", value: "No comment (it's not a cat)" },
+    ],
+    body: "The surprised cat face — wide eyes, open mouth, frozen body — is one of nature's most documented expressions. Usually triggered by: cucumber, vacuum cleaner, unexpected loud noise, or seeing another cat in the mirror. Universally relatable.",
+  },
+  {
+    id: "monorail-cat",
+    title: "Monorail Cat — Transport Legend",
+    emoji: "🚝",
+    url: "catpedia.cat/monorail-cat",
+    tags: ["monorail", "draping", "hanging", "sleepy", "transportation", "meme"],
+    content: [
+      { label: "Route", value: "Anywhere there's a narrow surface" },
+      { label: "Speed", value: "Extremely slow" },
+      { label: "Stops", value: "Wherever it feels like stopping" },
+      { label: "Ticket price", value: "One chin scratch" },
+      { label: "On-time rating", value: "N/A — cat operates on its own schedule" },
+    ],
+    body: "Monorail Cat drapes itself over any narrow surface — fence, railing, human arm — and slowly slides forward. The Imgur post with the caption 'Monorail Cat begins its journey' became one of the most-shared cat images of 2010. All aboard.",
+  },
+];
+
+const MORE_BREED_PAGES = [
+  {
+    id: "ragdoll",
+    title: "Ragdoll Cat",
+    emoji: "🪆",
+    url: "catbreeds.cat/ragdoll",
+    tags: ["ragdoll", "floppy", "gentle", "blue eyes", "large", "calm", "breed"],
+    content: [
+      { label: "Origin", value: "California, USA, 1960s" },
+      { label: "Signature trait", value: "Goes completely limp when held" },
+      { label: "Eyes", value: "Always blue, always soulful" },
+      { label: "Personality", value: "Dog-like, follows you room to room" },
+      { label: "Vibe", value: "The calmest creature on Earth" },
+    ],
+    body: "Ragdolls go limp like a ragdoll when picked up — this is not a joke, it is a real genetic trait. They have bright blue eyes, silky semi-long coats, and follow their owners everywhere like a very fluffy shadow. Extremely good.",
+  },
+  {
+    id: "norwegian-forest",
+    title: "Norwegian Forest Cat",
+    emoji: "🌲",
+    url: "catbreeds.cat/norwegian-forest",
+    tags: ["norwegian", "forest", "viking", "fluffy", "large", "wild", "breed"],
+    content: [
+      { label: "Origin", value: "Norway (obviously)" },
+      { label: "Viking name", value: "Skogkatt (Forest Cat)" },
+      { label: "Coat", value: "Double layer, waterproof, massive" },
+      { label: "Personality", value: "Independent, adventurous, outdoorsy" },
+      { label: "Historical role", value: "Moused on Viking ships" },
+    ],
+    body: "The Norwegian Forest Cat has a thick double coat that repels water and snow, allowing it to survive Scandinavian winters. They were mousers on Viking longships. They are ancient. They are majestic. They have no time for your nonsense.",
+  },
+  {
+    id: "abyssinian",
+    title: "Abyssinian Cat",
+    emoji: "⚡",
+    url: "catbreeds.cat/abyssinian",
+    tags: ["abyssinian", "active", "energetic", "ancient", "egypt", "sleek", "breed"],
+    content: [
+      { label: "Origin", value: "Ethiopia (ancient Abyssinia)" },
+      { label: "Build", value: "Lean, athletic, always in motion" },
+      { label: "Personality", value: "Curious, mischievous, never sits still" },
+      { label: "Ancient history", value: "May be the cat of the Pharaohs" },
+      { label: "Energy level", value: "Maximum at all times" },
+    ],
+    body: "Abyssinians are one of the oldest known cat breeds — their ancestors may have been worshipped in ancient Egypt. They are incredibly active and will investigate every single thing in your house. Every. Single. Thing. Never boring.",
+  },
+  {
+    id: "russian-blue",
+    title: "Russian Blue",
+    emoji: "💙",
+    url: "catbreeds.cat/russian-blue",
+    tags: ["russian blue", "grey", "silver", "green eyes", "quiet", "elegant", "breed"],
+    content: [
+      { label: "Origin", value: "Archangel, Russia" },
+      { label: "Coat", value: "Dense blue-grey double coat, shimmers" },
+      { label: "Eyes", value: "Vivid emerald green" },
+      { label: "Personality", value: "Reserved, loyal to one person, observant" },
+      { label: "Secret skill", value: "Appears to smile (it's the face shape)" },
+    ],
+    body: "Russian Blues have a distinctive blue-grey coat with a silvery sheen and startling green eyes. They are reserved with strangers but deeply loyal to their chosen human. They also appear to be permanently smiling. This is not manipulative. Probably.",
+  },
+];
+
+const SITE_PAGES = [
+  {
+    id: "site-home",
+    title: "Cat Town Homepage",
+    emoji: "🏠",
+    url: "cattown.cat/home",
+    tags: ["home", "homepage", "main", "start", "welcome", "cattown", "cat town", "site"],
+    content: [
+      { label: "Section", value: "Home" },
+      { label: "Features", value: "Hero, cat facts, visitor counter, XP sounds, city view" },
+      { label: "Cat fact updates", value: "Every 4 seconds" },
+      { label: "Visitor counter", value: "Yes (very important)" },
+      { label: "Recommended for", value: "Everyone. Always." },
+    ],
+    body: "The Cat Town homepage is where it all begins. You'll find the official welcome hero with the Computer Cat, a rotating cat facts box, the legendary visitor counter, the Windows XP sound panel, and an aerial view of Cat Town city. Navigate using the top bar.",
+  },
+  {
+    id: "site-memes",
+    title: "The Meme Vault",
+    emoji: "🏛️",
+    url: "cattown.cat/memes",
+    tags: ["memes", "vault", "hall of fame", "rated", "meme section", "collection"],
+    content: [
+      { label: "Section", value: "Memes" },
+      { label: "Total memes", value: "6 (Hall of Fame only)" },
+      { label: "Rating system", value: "1–5 stars, by the Council of Elders" },
+      { label: "Lowest rating", value: "4 stars (still legendary)" },
+      { label: "Dogs allowed", value: "NO" },
+    ],
+    body: "The Meme Vault contains Cat Town's official Hall of Fame — the six most important cat memes in internet history. Each one is rated by the Cat Town Council of Elders. Ratings are final. Click 'MEMES' in the top navigation to visit.",
+  },
+  {
+    id: "site-coolcats",
+    title: "The Cool Cats Roster",
+    emoji: "😎",
+    url: "cattown.cat/cool-cats",
+    tags: ["cool cats", "roster", "profiles", "mayor", "apply", "team", "staff"],
+    content: [
+      { label: "Section", value: "Cool Cats" },
+      { label: "Current roster", value: "4 official cats" },
+      { label: "Mayor", value: "Mr. Whiskers" },
+      { label: "Applications", value: "Open (mostly rejected)" },
+      { label: "Requirements", value: "Must be a cat. Must be cool." },
+    ],
+    body: "The Cool Cats section features the official Cat Town roster — the cats who run this place. You can view each cat's profile and title. You can also submit an application for your cat. We accept applications. We reject most of them. Click 'COOL CATS' in the nav.",
+  },
+  {
+    id: "site-games",
+    title: "Cat Town Games Room",
+    emoji: "🕹️",
+    url: "cattown.cat/games",
+    tags: ["games", "play", "snake", "pong", "minesweeper", "arcade", "fun", "game room"],
+    content: [
+      { label: "Section", value: "Games" },
+      { label: "Snake", value: "Arrow keys, eat fish, don't crash" },
+      { label: "Pong", value: "2 player, W/S vs ↑/↓, first to 7" },
+      { label: "Minesweeper", value: "16×16, 32 mines, right-click to flag" },
+      { label: "High scores", value: "In your heart" },
+    ],
+    body: "Cat Town has a fully playable Games Room with three classic games: Cat Snake (eat fish, avoid walls), Cat Pong (2-player on one keyboard), and Meow-Sweeper (Minesweeper but with 💣). Click '🕹️ GAMES' in the navigation to play.",
+  },
+  {
+    id: "site-browser",
+    title: "CatScape Navigator — Help",
+    emoji: "🌐",
+    url: "catscope://help",
+    tags: ["browser", "catscape", "navigator", "help", "how to", "search", "blocked", "banned"],
+    content: [
+      { label: "Browser name", value: "CatScape Navigator 3.0" },
+      { label: "Supported content", value: "Cats only" },
+      { label: "Blocked content", value: "Dogs, AI, vegetables, meetings, Mondays..." },
+      { label: "Search tip", value: "Try: breed names, meme names, site sections" },
+      { label: "Right-click", value: "Flags in Minesweeper (not here)" },
+    ],
+    body: "CatScape Navigator is Cat Town's built-in browser. Search for cat memes, cat breeds, or Cat Town site features. Certain keywords are permanently blocked (dogs, AI, Mondays, broccoli, etc.) and will return a firm NO. Try searching: 'maine coon', 'nyan cat', 'games', 'music'.",
+  },
+  {
+    id: "site-music",
+    title: "Cat Town Radio — Music Player",
+    emoji: "🎵",
+    url: "cattown.cat/radio",
+    tags: ["music", "radio", "chiptune", "undertale", "sound", "player", "play", "song"],
+    content: [
+      { label: "Player location", value: "Bottom-left corner, always visible" },
+      { label: "Genre", value: "Undertale-style chiptune" },
+      { label: "Instruments", value: "Square wave melody + triangle bass" },
+      { label: "Loop", value: "Infinite (it never stops)" },
+      { label: "Volume control", value: "Press ▶ PLAY MUSIC to start" },
+    ],
+    body: "Cat Town Radio plays a custom Undertale-style chiptune composed specifically for this site. The player is always visible in the bottom-left corner as a Windows XP-style window. Click '▶ PLAY MUSIC' to start. The animated waveform bars are real-time. The music is synthesized in your browser — no files needed.",
+  },
+  {
+    id: "site-about",
+    title: "About Cat Town",
+    emoji: "📜",
+    url: "cattown.cat/about",
+    tags: ["about", "history", "story", "founded", "1999", "rules", "stats", "webring"],
+    content: [
+      { label: "Section", value: "About" },
+      { label: "Founded", value: "1999 (by a cat)" },
+      { label: "Original builder", value: "Microsoft FrontPage" },
+      { label: "Rules listed", value: "7 official rules" },
+      { label: "Dogs mentioned", value: "Only to say NO" },
+    ],
+    body: "The About section covers Cat Town's full history since 1999, site stats (4,729 cats documented, zero AI used), and the 7 Official Cat Town Rules. Also includes the webring badge and a full stats table. Click 'ABOUT' in the navigation.",
+  },
+  {
+    id: "site-more",
+    title: "More — Timeline, Hall of Fame & Guestbook",
+    emoji: "📋",
+    url: "cattown.cat/more",
+    tags: ["more", "timeline", "hall of fame", "guestbook", "sign", "history", "extra"],
+    content: [
+      { label: "Section", value: "More" },
+      { label: "Timeline", value: "1999–2024, key cat internet moments" },
+      { label: "Hall of Fame", value: "Top 5 memes ranked" },
+      { label: "Guestbook", value: "3 historic entries + sign your own" },
+      { label: "Dog Alert box", value: "Highly visible. Bright red." },
+    ],
+    body: "The More section contains the official Cat Town timeline (1999–2024), the Top 5 Meme Hall of Fame, a Dog Alert warning box, and the Cat Town Guestbook where you can leave a message for history. Click 'MORE' in the navigation.",
+  },
+];
+
+const ALL_BROWSER_PAGES = [...MEME_PAGES, ...MORE_MEME_PAGES, ...BREED_PAGES, ...MORE_BREED_PAGES, ...SITE_PAGES];
 
 export default function Index() {
   const [activeSection, setActiveSection] = useState("home");
@@ -245,7 +523,8 @@ export default function Index() {
   const [browserInput, setBrowserInput] = useState("");
   const [browserPage, setBrowserPage] = useState<string | null>(null);
   const [browserBanned, setBrowserBanned] = useState(false);
-  const [browserTab, setBrowserTab] = useState<"memes" | "breeds">("memes");
+  const [browserBanReason, setBrowserBanReason] = useState("");
+  const [browserTab, setBrowserTab] = useState<"memes" | "breeds" | "site">("memes");
   const [browserHistory, setBrowserHistory] = useState<string[]>([]);
 
   useEffect(() => {
@@ -280,6 +559,20 @@ export default function Index() {
     window.scrollTo({ top: 0 });
   }
 
+  const DOG_WORDS = ["dog","dogs","doggo","doggy","puppy","puppies","pupper","pup","pups","canine","woof","bark","labrador","poodle","bulldog","beagle","dachshund","husky","corgi","golden retriever","german shepherd","rottweiler","chihuahua","pitbull","dalmatian","greyhound","spaniel","terrier","doberman"];
+  const AI_WORDS = ["ai","artificial intelligence","chatgpt","openai","midjourney","dall-e","stable diffusion","machine learning","neural","robot","gpt","llm","deepmind","copilot","gemini","claude","bard","algorithm","generated"];
+  const WORK_WORDS = ["monday","work","meeting","excel","powerpoint","boss","deadline"];
+  const FOOD_WORDS = ["vegetables","broccoli","diet","exercise","gym","fish tank","hamster","parrot","bird","reptile","snake food","lizard"];
+
+  function getBanReason(q: string): string {
+    const lower = q.toLowerCase();
+    if (DOG_WORDS.some(w => lower.includes(w))) return "dog";
+    if (AI_WORDS.some(w => lower.includes(w))) return "ai";
+    if (WORK_WORDS.some(w => lower.includes(w))) return "work";
+    if (FOOD_WORDS.some(w => lower.includes(w))) return "other";
+    return "other";
+  }
+
   function isBanned(q: string) {
     const lower = q.toLowerCase();
     return BANNED_WORDS.some(w => lower.includes(w));
@@ -291,6 +584,7 @@ export default function Index() {
     if (!q) return;
     if (isBanned(q)) {
       setBrowserBanned(true);
+      setBrowserBanReason(getBanReason(q));
       setBrowserPage(null);
       setBrowserQuery(q);
       return;
@@ -940,21 +1234,32 @@ export default function Index() {
 
                 {/* BANNED */}
                 {browserBanned && (
-                  <div className="flex flex-col items-center justify-center p-16 text-center" style={{ background: "white", minHeight: 400 }}>
-                    <div style={{ fontSize: 120, lineHeight: 1 }}>🚫</div>
-                    <div className="font-pixel mt-6 mb-4" style={{ fontSize: "28px", color: "var(--ct-red)" }}>NO</div>
-                    <div className="font-pixel mb-2" style={{ fontSize: "11px", color: "var(--ct-black)" }}>
-                      Error 403: Forbidden
+                  <div className="flex flex-col items-center justify-center p-12 text-center" style={{ background: "white", minHeight: 400 }}>
+                    <div style={{ fontSize: 100, lineHeight: 1 }}>
+                      {browserBanReason === "dog" ? "🐾" : browserBanReason === "ai" ? "🤖" : browserBanReason === "work" ? "📊" : "🚫"}
                     </div>
-                    <div className="font-comic font-bold text-lg mt-2" style={{ color: "#444", maxWidth: 400 }}>
-                      CatScape Navigator has blocked your search for <strong>"{browserQuery}"</strong>.
+                    <div className="font-pixel mt-5 mb-3" style={{ fontSize: "32px", color: "var(--ct-red)" }}>NO</div>
+                    <div className="font-pixel mb-3" style={{ fontSize: "10px", color: "#888" }}>
+                      {browserBanReason === "dog" && "Error 403 — DOG_CONTENT_BLOCKED"}
+                      {browserBanReason === "ai" && "Error 403 — AI_CONTENT_PROHIBITED"}
+                      {browserBanReason === "work" && "Error 403 — WORK_CONTENT_REJECTED"}
+                      {browserBanReason === "other" && "Error 403 — CONTENT_NOT_CAT"}
                     </div>
-                    <div className="font-comic font-bold mt-3" style={{ color: "#666" }}>
-                      This browser only shows cats. Try searching: <em>memes, breeds, nyan, fluffy, grumpy...</em>
+                    <div className="font-comic font-bold text-lg mt-1" style={{ color: "#222", maxWidth: 440 }}>
+                      {browserBanReason === "dog" && <>CatScape has detected <strong>dog content</strong> in your search for "{browserQuery}". Dogs are not supported, endorsed, or acknowledged on this network.</>}
+                      {browserBanReason === "ai" && <>Your search for "{browserQuery}" triggered the <strong>Anti-AI Filter</strong>. CatScape Navigator contains zero artificial intelligence. All opinions are genuine cat opinions.</>}
+                      {browserBanReason === "work" && <>"{browserQuery}"? On Cat Town? You came to a cat website to think about <strong>work</strong>? Please. Sit down. Look at some cats. Relax.</>}
+                      {browserBanReason === "other" && <>CatScape Navigator has blocked your search for <strong>"{browserQuery}"</strong>. This browser only indexes cat content.</>}
                     </div>
-                    <div className="font-pixel mt-6 blink" style={{ fontSize: "10px", color: "var(--ct-red)" }}>
-                      ⚠️ YOUR SEARCH HAS BEEN LOGGED AND JUDGED ⚠️
+                    <div className="mt-5 p-4 font-comic font-bold text-sm" style={{ background: "#fffbe6", border: "3px solid var(--ct-black)", maxWidth: 400 }}>
+                      💡 <strong>Try instead:</strong> nyan cat · maine coon · grumpy · keyboard cat · sphynx · games · music · memes · ragdoll · loaf
                     </div>
+                    <div className="font-pixel mt-5 blink" style={{ fontSize: "9px", color: "var(--ct-red)" }}>
+                      ⚠️ THIS SEARCH HAS BEEN LOGGED, JUDGED, AND FOUND WANTING ⚠️
+                    </div>
+                    <button onClick={() => { setBrowserBanned(false); setBrowserQuery(""); setBrowserInput(""); }} className="xp-btn mt-4" style={{ fontSize: "9px" }}>
+                      ← GO BACK AND SEARCH FOR CATS
+                    </button>
                   </div>
                 )}
 
@@ -1032,7 +1337,7 @@ export default function Index() {
                         <div style={{ fontSize: 64 }}>🐾</div>
                         <div className="font-pixel mt-4 mb-2" style={{ fontSize: "11px" }}>NO RESULTS FOUND</div>
                         <div className="font-comic font-bold" style={{ color: "#666" }}>
-                          We couldn't find anything for "{browserQuery}". Try: memes, nyan, grumpy, maine coon, sphynx...
+                          We couldn't find anything for "{browserQuery}". Try: nyan cat · grumpy · maine coon · sphynx · ragdoll · games · music · guestbook · loaf · surprised
                         </div>
                       </div>
                     )}
@@ -1047,25 +1352,40 @@ export default function Index() {
                     </div>
 
                     {/* Tab switcher */}
-                    <div className="flex mb-4" style={{ borderBottom: "3px solid var(--ct-black)" }}>
-                      {(["memes", "breeds"] as const).map(tab => (
-                        <button key={tab} onClick={() => setBrowserTab(tab)}
-                          className="font-pixel px-6 py-2"
+                    <div className="flex mb-4 flex-wrap" style={{ borderBottom: "3px solid var(--ct-black)" }}>
+                      {([
+                        { id: "memes", label: "🐾 MEMES" },
+                        { id: "breeds", label: "📖 BREEDS" },
+                        { id: "site", label: "🏠 THIS SITE" },
+                      ] as const).map(tab => (
+                        <button key={tab.id} onClick={() => setBrowserTab(tab.id)}
+                          className="font-pixel px-5 py-2"
                           style={{
                             fontSize: "9px",
-                            background: browserTab === tab ? "var(--ct-yellow)" : "white",
+                            background: browserTab === tab.id ? "var(--ct-yellow)" : "white",
                             border: "3px solid var(--ct-black)",
-                            borderBottom: browserTab === tab ? "3px solid var(--ct-yellow)" : "3px solid var(--ct-black)",
-                            marginBottom: browserTab === tab ? -3 : 0,
+                            borderBottom: browserTab === tab.id ? "3px solid var(--ct-yellow)" : "3px solid var(--ct-black)",
+                            marginBottom: browserTab === tab.id ? -3 : 0,
                             fontWeight: "bold",
                           }}>
-                          {tab === "memes" ? "🐾 MEMES" : "📖 BREEDS"}
+                          {tab.label}
                         </button>
                       ))}
                     </div>
 
+                    {browserTab === "site" && (
+                      <div className="mb-4 p-3 font-comic font-bold text-sm" style={{ background: "#fffbe6", border: "3px solid var(--ct-black)" }}>
+                        💡 Search for features on this website — music, games, memes, cool cats, guestbook, and more!
+                      </div>
+                    )}
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {(browserTab === "memes" ? MEME_PAGES : BREED_PAGES).map(page => (
+                      {(browserTab === "memes"
+                        ? [...MEME_PAGES, ...MORE_MEME_PAGES]
+                        : browserTab === "breeds"
+                        ? [...BREED_PAGES, ...MORE_BREED_PAGES]
+                        : SITE_PAGES
+                      ).map(page => (
                         <div key={page.id}
                           onClick={() => openBrowserPage(page.id)}
                           className="cursor-pointer p-4 flex items-center gap-3"
