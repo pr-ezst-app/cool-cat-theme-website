@@ -6,96 +6,335 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+    --radius: 0rem;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Cat Town colors */
+    --ct-yellow: #ffe600;
+    --ct-black: #000000;
+    --ct-white: #ffffff;
+    --ct-red: #ff2222;
+    --ct-blue: #0000cc;
+    --ct-teal: #00aaaa;
+    --ct-orange: #ff6600;
+    --ct-purple: #9900cc;
+    --ct-lime: #88ff00;
+    --ct-pink: #ff00aa;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    border-radius: 0 !important;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--ct-yellow);
+    color: var(--ct-black);
+    font-family: "Comic Neue", cursive;
+    cursor:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E🐾%3C/text%3E%3C/svg%3E")
+        4 4,
+      auto;
   }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Fredoka One", cursive;
+  }
+
+  .font-pixel {
+    font-family: "Press Start 2P", monospace;
+  }
+
+  .font-marker {
+    font-family: "Permanent Marker", cursive;
+  }
+
+  .font-comic {
+    font-family: "Comic Neue", cursive;
+  }
+}
+
+/* XP-style window */
+.xp-window {
+  border: 3px solid var(--ct-black);
+  box-shadow: 4px 4px 0px var(--ct-black);
+  background: white;
+}
+
+.xp-titlebar {
+  background: var(--ct-blue);
+  color: white;
+  padding: 4px 8px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--ct-black);
+}
+
+.xp-btn {
+  background: var(--ct-yellow);
+  border: 3px solid var(--ct-black);
+  box-shadow: 3px 3px 0 var(--ct-black);
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.05s;
+  color: var(--ct-black);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.xp-btn:hover {
+  box-shadow: 1px 1px 0 var(--ct-black);
+  transform: translate(2px, 2px);
+  background: var(--ct-orange);
+  color: var(--ct-white);
+}
+
+.xp-btn:active {
+  box-shadow: 0px 0px 0 var(--ct-black);
+  transform: translate(3px, 3px);
+}
+
+.xp-btn-red {
+  background: var(--ct-red);
+  color: white;
+}
+
+.xp-btn-red:hover {
+  background: #cc0000;
+  color: white;
+}
+
+/* Ticker tape marquee */
+.ticker {
+  background: var(--ct-black);
+  color: var(--ct-yellow);
+  font-family: "Press Start 2P", monospace;
+  font-size: 11px;
+  padding: 8px 0;
+  overflow: hidden;
+  border-top: 3px solid var(--ct-yellow);
+  border-bottom: 3px solid var(--ct-yellow);
+  white-space: nowrap;
+}
+
+.ticker-inner {
+  display: inline-block;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Blink animation for retro feel */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s step-start infinite;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(3px) rotate(1deg);
+  }
+}
+
+.shake-hover:hover {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Bounce */
+@keyframes bounce-cat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.bounce-cat {
+  animation: bounce-cat 1.5s ease-in-out infinite;
+}
+
+/* Star border */
+.star-border {
+  border: 4px solid var(--ct-black);
+  box-shadow: 6px 6px 0 var(--ct-black);
+}
+
+/* Meme card */
+.meme-card {
+  border: 4px solid var(--ct-black);
+  box-shadow: 6px 6px 0 var(--ct-black);
+  background: white;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+
+.meme-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--ct-black);
+}
+
+/* Nav */
+.nav-link {
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  color: var(--ct-white);
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 2px solid transparent;
+  transition: all 0.1s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--ct-yellow);
+  color: var(--ct-black);
+  border: 2px solid var(--ct-black);
+}
+
+/* Section divider */
+.section-divider {
+  border: none;
+  border-top: 4px solid var(--ct-black);
+  margin: 0;
+}
+
+/* Hit counter style */
+.hit-counter {
+  font-family: "Press Start 2P", monospace;
+  font-size: 14px;
+  background: var(--ct-black);
+  color: var(--ct-lime);
+  padding: 8px 16px;
+  border: 3px solid var(--ct-lime);
+  letter-spacing: 4px;
+  display: inline-block;
+}
+
+/* Cat fact box */
+.fact-box {
+  background: var(--ct-teal);
+  border: 4px solid var(--ct-black);
+  box-shadow: 5px 5px 0 var(--ct-black);
+  color: white;
+}
+
+/* Star rating */
+.star-rating {
+  color: var(--ct-orange);
+  font-size: 1.5rem;
+}
+
+/* Popup notification */
+@keyframes slide-in {
+  from {
+    transform: translateX(120%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.popup-notif {
+  animation: slide-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ct-yellow);
+  border-left: 2px solid var(--ct-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ct-black);
+  border: 2px solid var(--ct-yellow);
+}
+
+/* Selection */
+::selection {
+  background: var(--ct-black);
+  color: var(--ct-yellow);
+}
+
+/* Table retro style */
+.retro-table {
+  border: 3px solid var(--ct-black);
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.retro-table th {
+  background: var(--ct-black);
+  color: var(--ct-yellow);
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  padding: 10px;
+  border: 2px solid var(--ct-black);
+}
+
+.retro-table td {
+  border: 2px solid var(--ct-black);
+  padding: 8px 12px;
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+}
+
+.retro-table tr:nth-child(even) td {
+  background: #fffbe6;
 }
